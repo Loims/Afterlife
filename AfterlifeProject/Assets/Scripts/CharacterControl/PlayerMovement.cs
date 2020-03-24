@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private enum State
+    public enum State
     {
         NULL,
         WHALE,
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if(playerState == State.NULL)
         {
             playerState = State.WHALE;
@@ -30,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Mouse X");
+        float v = Input.GetAxis("Mouse Y");
 
         LocalMove(h, v, xyspeed);
         ClampPosition();
@@ -73,9 +74,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (state == State.PLANE)
         {
-            if (xyspeed != 15)
+            if (xyspeed != 12)
             {
-                xyspeed = 15;
+                xyspeed = 12;
             }
         }
 
@@ -86,5 +87,10 @@ public class PlayerMovement : MonoBehaviour
                 xyspeed = 10;
             }
         }
+    }
+
+    public State GetCurrentState()
+    {
+        return playerState;
     }
 }
