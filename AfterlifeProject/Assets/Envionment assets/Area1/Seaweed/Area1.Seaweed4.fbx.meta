@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: 7134024659167018602
     second: Armature.001|Seaweed04.Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1.Seaweed04.Base
+    second: {fileID: 2100000, guid: 38223fbe1b1ab474080d2f25cef253ad, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
