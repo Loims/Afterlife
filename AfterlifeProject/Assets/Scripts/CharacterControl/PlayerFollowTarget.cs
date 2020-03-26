@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerFollowTarget : MonoBehaviour
 {
+    private PlaneMovement planeComp;
     private PlayerMovement movementComp;
+    private PlayerDeath deathComp;
 
     [SerializeField] private Transform target;
 
@@ -13,16 +15,15 @@ public class PlayerFollowTarget : MonoBehaviour
     private float rollSpeed;
     private float rollProgress;
 
-    private float leftRollTimer = 0f;
-    private float rightRollTimer = 0f;
-
     private bool barrelRolling = false;
     private bool rollLeft = false;
     private bool rollRight = false;
 
     private void OnEnable()
     {
+        planeComp = transform.parent.GetComponent<PlaneMovement>();
         movementComp = transform.parent.GetComponentInChildren<PlayerMovement>();
+        deathComp = transform.parent.GetComponentInChildren<PlayerDeath>();
         target = transform.parent.GetChild(2).transform;
         smoothSpeed = 0.125f;
         rotateSpeed = 2f;
@@ -58,6 +59,13 @@ public class PlayerFollowTarget : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            planeComp.ResetPlane();
+            movementComp.ChangeStateData();
+            deathComp.DeathEvent();
         }
     }
 
