@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: S.Aea1.Whale.Base
-  m_Shader: {fileID: -6465566751694194690, guid: f01b8a33d92884158967d8e97b45c953,
+  m_Shader: {fileID: -6465566751694194690, guid: bbeb88dcb24674fd495d6191073f46ec,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalFromTexture_9A78DBE1_Texture_0:
-        m_Texture: {fileID: 2800000, guid: b18ef9ed522f78a4cb609812f8bb1fe0, type: 3}
+        m_Texture: {fileID: 2800000, guid: df2325c57779d214ab5cba933fe34acb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -62,11 +62,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_A8DD292A_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 4a291c449fad8894bac8b776448c65c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: e6c66b63c67b0b140b54e13b558a428f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_D1960E12_Texture_1:
         m_Texture: {fileID: 2800000, guid: e2ed014dd0b197640a3672e6beded369, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_F2C4F419_Texture_1:
+        m_Texture: {fileID: 2800000, guid: e776a09a8dc40384e8636bf129771c80, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
