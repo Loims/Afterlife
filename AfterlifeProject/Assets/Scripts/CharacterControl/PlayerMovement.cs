@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
         FLARE
     }
 
-    [SerializeField] private State playerState;
+    public State playerState;
 
     public float xyspeed = 8f;
 
@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         if(playerState == State.NULL)
         {
-            playerState = State.WHALE;
-            ChangeStateData(playerState);
+            ChangeStateData();
         }
     }
 
@@ -36,12 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
         LocalMove(h, v, xyspeed);
         ClampPosition();
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            playerState += 1;
-            ChangeStateData(playerState);
-        }
     }
     
     private void LocalMove(float x, float y, float speed)
@@ -60,19 +53,19 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
 
-    private void ChangeStateData(State state)
+    public void ChangeStateData()
     {
-        playerState = state;
+        playerState += 1;
 
-        if(state == State.WHALE)
+        if (playerState == State.WHALE)
         {
-            if(xyspeed != 8)
+            if(xyspeed != 6)
             {
-                xyspeed = 8;
+                xyspeed = 6;
             }
         }
 
-        if (state == State.PLANE)
+        if (playerState == State.PLANE)
         {
             if (xyspeed != 12)
             {
@@ -80,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (state == State.FLARE)
+        if (playerState == State.FLARE)
         {
             if (xyspeed != 10)
             {

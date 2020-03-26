@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PlaneMovement : MonoBehaviour
 {
+    private PlayerMovement movementComp;
+
     public float moveSpeed;
 
     private void OnEnable()
     {
-        moveSpeed = 10f;
+        movementComp = GetComponentInChildren<PlayerMovement>();
     }
     void Update()
     {
+        moveSpeed = movementComp.xyspeed + 2;
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            ResetPlane();
-        }
     }
 
     public void ResetPlane()
