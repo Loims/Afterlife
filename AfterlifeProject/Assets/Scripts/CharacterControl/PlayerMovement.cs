@@ -59,9 +59,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerState == State.WHALE)
         {
-            if(xyspeed != 6)
+            if(xyspeed != 8)
             {
-                xyspeed = 6;
+                xyspeed = 8;
             }
         }
 
