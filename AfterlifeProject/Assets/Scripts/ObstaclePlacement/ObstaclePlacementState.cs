@@ -77,4 +77,22 @@ public class ObstaclePlacementState : MonoBehaviour
                 break;
         }
     }
+
+    public void ClearObjectsInChildren()
+    {
+        switch (playerGenerationState)
+        {
+            case PlayerMovement.State.WHALE:
+                oceanScript.ClearObjects();
+                break;
+
+            case PlayerMovement.State.PLANE:
+                //skyScript.ClearObjects();
+                break;
+
+            case PlayerMovement.State.FLARE:
+                //caveScript.ClearObjects();
+                break;
+        }
+    }
 }

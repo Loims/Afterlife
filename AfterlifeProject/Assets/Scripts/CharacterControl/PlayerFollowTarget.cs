@@ -7,6 +7,7 @@ public class PlayerFollowTarget : MonoBehaviour
     private PlaneMovement planeComp;
     private PlayerMovement movementComp;
     private PlayerDeath deathComp;
+    private ObstaclePlacementState obstacleComp;
 
     [SerializeField] private Transform target;
 
@@ -24,6 +25,8 @@ public class PlayerFollowTarget : MonoBehaviour
         planeComp = transform.parent.GetComponent<PlaneMovement>();
         movementComp = transform.parent.GetComponentInChildren<PlayerMovement>();
         deathComp = transform.parent.GetComponentInChildren<PlayerDeath>();
+        obstacleComp = transform.parent.GetComponentInChildren<ObstaclePlacementState>();
+
         target = transform.parent.GetChild(2).transform;
         smoothSpeed = 0.125f;
         rotateSpeed = 2f;
@@ -59,13 +62,6 @@ public class PlayerFollowTarget : MonoBehaviour
                     }
                 }
             }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            planeComp.ResetPlane();
-            movementComp.ChangeStateData();
-            deathComp.DeathEvent();
         }
     }
 
@@ -124,6 +120,30 @@ public class PlayerFollowTarget : MonoBehaviour
             transform.Rotate(0, 0, 0);
             rollProgress = 0;
             movementComp.xyspeed = 12f;
+        }
+    }
+
+    private void CollisionEvent()
+    {
+        planeComp.ResetPlane();
+        movementComp.ChangeStateData();
+        deathComp.DeathEvent();
+        obstacleComp.ClearObjectsInChildren();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "MainCliff")
+        {
+            CollisionEvent();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "NearMiss")
+        {
+            Debug.Log("Exit with " + other.gameObject);
         }
     }
 }
