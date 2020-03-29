@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c4526f5ac13dd4e1daa1aa4f4f44c2d9
+guid: 5ca2f01be8e414026b2d11ae3e1bb690
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Area1.Coral1.Base
-    second: {fileID: 2100000, guid: 047180be4c7b14915bee4fb14be876df, type: 2}
+      name: Area1.Coral02.Base
+    second: {fileID: 2100000, guid: 5450fbe830e2d465a95bb8a44e4e5985, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
