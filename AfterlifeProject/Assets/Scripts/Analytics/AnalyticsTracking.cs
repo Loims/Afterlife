@@ -34,6 +34,8 @@ public class AnalyticsTracking : MonoBehaviour
     public GameObject playerObject;
     public PlayerMovement playerMovement;
 
+    private bool canSetTimeToFirstCollision = true;
+
     private void OnEnable()
     {
         if (playerMovement != null)
@@ -83,6 +85,15 @@ public class AnalyticsTracking : MonoBehaviour
 
             SavePretty(bigData);
         }
+
+        if(canSetTimeToFirstCollision)
+        {
+            if(playerObject.GetComponentInChildren<PlayerFollowTarget>().hasHitObstacle)
+            {
+                bigData.timeToFirstCollision = Time.time;
+                canSetTimeToFirstCollision = false;
+            }
+        }
     }
 
     public void RaycastCardinal()
@@ -113,10 +124,10 @@ public class AnalyticsTracking : MonoBehaviour
                         if (bigData.distanceToObstacles != null)
                         {
                             bigData.distanceToObstacles.Add(hit.distance);
-                            if (bigData.timeToFirstCollision == 0)
-                            {
-                                bigData.timeToFirstCollision = Time.time - timeStarted;
-                            }
+                            //if (bigData.timeToFirstCollision == 0)
+                            //{
+                            //    bigData.timeToFirstCollision = Time.time - timeStarted;
+                            //}
                         }
                     }
                 }

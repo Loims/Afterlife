@@ -22,6 +22,8 @@ public class PlayerFollowTarget : MonoBehaviour
 
     [SerializeField] private float formTimer;
 
+    [SerializeField] public bool hasHitObstacle = false;
+
     //TEMP
     private bool spawnedEnd = false;
 
@@ -157,6 +159,10 @@ public class PlayerFollowTarget : MonoBehaviour
 
     private void CollisionEvent()
     {
+        if (!hasHitObstacle)
+        {
+            hasHitObstacle = true;
+        }
         planeComp.ResetPlane();
         movementComp.ChangeStateData();
         deathComp.DeathEvent();
@@ -178,6 +184,7 @@ public class PlayerFollowTarget : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.tag == "MainCliff")
         {
             CollisionEvent();
