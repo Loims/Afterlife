@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{6F2566A8-9EA6-1BE8-E23D-FD7E35842F4D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Compiled-Shader Graphs-Area2.CloudShader.shader">
+    <Files>
+      <File FileName="Assets/Compiled-Shader Graphs-Area2.CloudShader.shader" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9a7e18f7-edf7-4d3b-b2a5-62b026a55bc2" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
