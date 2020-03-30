@@ -14,7 +14,18 @@ public class PlaneMovement : MonoBehaviour
     }
     void Update()
     {
-        moveSpeed = movementComp.xyspeed + 2;
+        if (movementComp.playerState == PlayerMovement.State.WHALE)
+        {
+            moveSpeed = 8f;
+        }
+        else if (movementComp.playerState == PlayerMovement.State.PLANE)
+        {
+            moveSpeed = 30f;
+        }
+        else if (movementComp.playerState == PlayerMovement.State.FLARE)
+        {
+            moveSpeed = 15f;
+        }
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 

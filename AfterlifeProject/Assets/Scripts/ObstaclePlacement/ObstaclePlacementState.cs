@@ -87,7 +87,7 @@ public class ObstaclePlacementState : MonoBehaviour
                 break;
 
             case PlayerMovement.State.PLANE:
-                //skyScript.ClearObjects();
+                skyScript.ClearObjects();
                 break;
 
             case PlayerMovement.State.FLARE:

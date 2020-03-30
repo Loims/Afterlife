@@ -20,6 +20,11 @@ public class PlayerFollowTarget : MonoBehaviour
     private bool rollLeft = false;
     private bool rollRight = false;
 
+    [SerializeField] private float formTimer;
+
+    //TEMP
+    private bool spawnedEnd = false;
+
     private void OnEnable()
     {
         planeComp = transform.parent.GetComponent<PlaneMovement>();
@@ -31,6 +36,8 @@ public class PlayerFollowTarget : MonoBehaviour
         smoothSpeed = 0.125f;
         rotateSpeed = 2f;
         rollSpeed = 800f;
+
+        formTimer = 0f;
     }
 
     private void Update()
@@ -67,6 +74,31 @@ public class PlayerFollowTarget : MonoBehaviour
 
     private void FixedUpdate()
     {
+        formTimer += Time.deltaTime;
+
+        if (movementComp.playerState != PlayerMovement.State.FLARE)
+        {
+            if (formTimer >= 120f)
+            {
+                planeComp.ResetPlane();
+                movementComp.ChangeStateData();
+                deathComp.DeathEvent();
+                obstacleComp.ClearObjectsInChildren();
+                formTimer = 0f;
+            }
+        }
+        else
+        {
+            if (formTimer >= 120f)
+            {
+                if(!spawnedEnd)
+                {
+                    Instantiate(Resources.Load<GameObject>("End"), new Vector3(transform.position.x, transform.position.y, transform.position.z + 40f), Quaternion.identity);
+                    spawnedEnd = true;
+                }
+            }
+        }
+
         MoveToTarget();
         RotateToTarget();
         if(rollLeft)
@@ -129,6 +161,19 @@ public class PlayerFollowTarget : MonoBehaviour
         movementComp.ChangeStateData();
         deathComp.DeathEvent();
         obstacleComp.ClearObjectsInChildren();
+        formTimer = 0f;
+    }
+
+    private void StopGameWithLoss()
+    {
+        Debug.Log("YOU LOSE");
+        Time.timeScale = 0f;
+    }
+
+    private void StopGameWithWin()
+    {
+        Debug.Log("YOU WIN");
+        Time.timeScale = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -136,6 +181,23 @@ public class PlayerFollowTarget : MonoBehaviour
         if(other.tag == "MainCliff")
         {
             CollisionEvent();
+        }
+
+        if(other.tag == "SkyObstacle")
+        {
+            CollisionEvent();
+        }
+
+        if(other.tag == "CaveObstacle")
+        {
+            //THIS IS PLACEHOLDER
+            StopGameWithLoss();
+        }
+
+        if(other.tag == "EndObstacle")
+        {
+            //PLACEHOLDER
+            StopGameWithWin();
         }
     }
 
