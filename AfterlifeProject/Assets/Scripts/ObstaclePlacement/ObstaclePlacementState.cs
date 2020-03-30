@@ -17,6 +17,9 @@ public class ObstaclePlacementState : MonoBehaviour
     private CavePlacement caveScript;
     #endregion
 
+    /// <summary>
+    /// Generates an instance of this object and initializes variables
+    /// </summary>
     private void OnEnable()
     {
         //Instance generation
@@ -32,6 +35,9 @@ public class ObstaclePlacementState : MonoBehaviour
         caveScript = GetComponent<CavePlacement>();
     }
 
+    /// <summary>
+    /// Helper method for instantiating singleton
+    /// </summary>
     private void InstantiateSingleton()
     {
         if (instance == null)
@@ -44,6 +50,9 @@ public class ObstaclePlacementState : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles state machine for obstacle generation
+    /// </summary>
     private void Update()
     {
         if(playerGenerationState != playerMovementScript.playerState)
@@ -53,7 +62,10 @@ public class ObstaclePlacementState : MonoBehaviour
 
         GenerationStateMachine();
     }
-
+    
+    /// <summary>
+    /// Handles the enabling and disabling of generation scripts
+    /// </summary>
     private void GenerationStateMachine()
     {
         switch (playerGenerationState)
@@ -78,6 +90,9 @@ public class ObstaclePlacementState : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clears all objects from sorting objects, clearing the level for the next generation algorithm
+    /// </summary>
     public void ClearObjectsInChildren()
     {
         switch (playerGenerationState)

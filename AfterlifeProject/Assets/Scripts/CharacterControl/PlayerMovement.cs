@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Locks the cursor at the start of the game
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to move the player aim target based on mouse input. Player follows the aim target
+    /// </summary>
     private void Update()
     {
         float h = Input.GetAxis("Mouse X");
@@ -47,11 +51,20 @@ public class PlayerMovement : MonoBehaviour
         ClampPosition();
     }
     
+    /// <summary>
+    /// Helper method used to move the target
+    /// </summary>
+    /// <param name="x"> Mouse X input </param>
+    /// <param name="y"> Mouse Y input </param>
+    /// <param name="speed"> Speed variable </param>
     private void LocalMove(float x, float y, float speed)
     {
         transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Clamps the player to the camera frustrum
+    /// </summary>
     private void ClampPosition()
     {
         float xClamp = Screen.width / 8;
@@ -63,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
 
+    /// <summary>
+    /// Called when player collides. Changes the player's state to the next state and updates the speed. Invokes an event for analytics tracking
+    /// </summary>
     public void ChangeStateData()
     {
         playerState += 1;
@@ -93,6 +109,9 @@ public class PlayerMovement : MonoBehaviour
         onStateChange.Invoke(playerState);
     }
 
+    /// <summary>
+    /// Gets current state
+    /// </summary>
     public State GetCurrentState()
     {
         return playerState;

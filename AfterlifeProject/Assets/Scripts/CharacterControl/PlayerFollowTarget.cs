@@ -27,6 +27,9 @@ public class PlayerFollowTarget : MonoBehaviour
     //TEMP
     private bool spawnedEnd = false;
 
+    /// <summary>
+    /// Instantiate component references and variables
+    /// </summary>
     private void OnEnable()
     {
         planeComp = transform.parent.GetComponent<PlaneMovement>();
@@ -42,8 +45,12 @@ public class PlayerFollowTarget : MonoBehaviour
         formTimer = 0f;
     }
 
+    /// <summary>
+    /// Update used for allowing barrel rolling in the plane state
+    /// </summary>
     private void Update()
     {
+        //Allows barrel rolling to execute if in plane state
         if (movementComp.GetCurrentState() == PlayerMovement.State.PLANE)
         {
             if (Input.GetMouseButtonDown(0))
@@ -59,6 +66,7 @@ public class PlayerFollowTarget : MonoBehaviour
                 }
             }
 
+            //Initiate barrel roll on mouse press
             if (Input.GetMouseButtonDown(1))
             {
                 if (!barrelRolling)
@@ -74,6 +82,9 @@ public class PlayerFollowTarget : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Controls player movement and form timing. When form timer reaches certain value, form naturally progresses. 
+    /// </summary>
     private void FixedUpdate()
     {
         formTimer += Time.deltaTime;
@@ -113,6 +124,9 @@ public class PlayerFollowTarget : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the player object to the invisible mouse target. Used to get smooth moving.
+    /// </summary>
     private void MoveToTarget()
     {
         Vector3 desiredPos = new Vector3(target.position.x, target.position.y, target.position.z - 2);
@@ -120,6 +134,9 @@ public class PlayerFollowTarget : MonoBehaviour
         transform.position = smoothedPos;
     }
 
+    /// <summary>
+    /// Keeps the player object rotated towards the invisible mouse target. Used alongside MoveToTarget()
+    /// </summary>
     private void RotateToTarget()
     {
         Vector3 targetPosition = target.transform.position - transform.position;
@@ -130,6 +147,9 @@ public class PlayerFollowTarget : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Used to roll the player left when a barrel roll is initiated
+    /// </summary>
     private void RollLeft()
     {
         rollProgress += rollSpeed * Time.deltaTime;
@@ -143,6 +163,9 @@ public class PlayerFollowTarget : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to roll the player right when a barrel roll is initiated
+    /// </summary>
     private void RollRight()
     {
         rollProgress -= rollSpeed * Time.deltaTime;
@@ -157,6 +180,9 @@ public class PlayerFollowTarget : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Collision event that is called when the player collides. Performs form changing, plane resetting, and has events for death in the future
+    /// </summary>
     private void CollisionEvent()
     {
         if (!hasHitObstacle)
@@ -170,12 +196,18 @@ public class PlayerFollowTarget : MonoBehaviour
         formTimer = 0f;
     }
 
+    /// <summary>
+    /// Temp method. Ends the game with a loss
+    /// </summary>
     private void StopGameWithLoss()
     {
         Debug.Log("YOU LOSE");
         Time.timeScale = 0f;
     }
 
+    /// <summary>
+    /// Temp method. Ends the game with a win
+    /// </summary>
     private void StopGameWithWin()
     {
         Debug.Log("YOU WIN");

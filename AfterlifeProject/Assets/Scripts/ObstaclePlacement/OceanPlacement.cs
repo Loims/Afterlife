@@ -28,6 +28,9 @@ public class OceanPlacement : MonoBehaviour
 
     private float cliffDelay = 2f;
 
+    /// <summary>
+    /// Instantiate prefabs and variables
+    /// </summary>
     private void OnEnable()
     {
         InstantiatePrefabs();
@@ -38,6 +41,9 @@ public class OceanPlacement : MonoBehaviour
         obstacleList = new List<GameObject>();
     }
 
+    /// <summary>
+    /// Sets the ocean parents object and gets the object pooler instance. Create initial ocean floor objects
+    /// </summary>
     private void Start()
     {
         oceanParent = GameObject.Find("OceanObjects");
@@ -55,6 +61,9 @@ public class OceanPlacement : MonoBehaviour
         StartCoroutine(SpawnCliffs(cliffDelay));
     }
 
+    /// <summary>
+    /// Move any floor tiles that go offscreen. Returns cliffs to the object pooler if offscreen
+    /// </summary>
     private void Update()
     {
         foreach(GameObject obj in objectList)
@@ -71,6 +80,9 @@ public class OceanPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Helper method for instatiating prefabs
+    /// </summary>
     private void InstantiatePrefabs()
     {
         oceanFloor = Resources.Load<GameObject>("OceanFloor");
@@ -81,6 +93,9 @@ public class OceanPlacement : MonoBehaviour
         cliff4 = Resources.Load<GameObject>("Area1.Cliff8");
     }
 
+    /// <summary>
+    /// Helper method for moving floor tiles
+    /// </summary>
     private void MoveFloorTile(GameObject obj)
     {
         if (obj.transform.position.z <= planeTransform.position.z - (oceanFloor.transform.localScale.z * 5))
@@ -90,11 +105,19 @@ public class OceanPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns cliff object to pool
+    /// </summary>
+    /// <param name="cliff"></param>
     private void ReturnCliffToPool(GameObject cliff)
     {
         pooler.ReturnToPool(cliff);
     }
 
+
+    /// <summary>
+    /// Coroutine for spawning cliffs
+    /// </summary>
     private IEnumerator SpawnCliffs(float waitTime)
     {
         while (true)
@@ -104,6 +127,9 @@ public class OceanPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Helper method for spawning a cliff prefab. Decides what variant to spawn and then calls a helper method to generate a position
+    /// </summary>
     private void SpawnCliffPrefab()
     {
         GameObject cliffVariant;
@@ -141,6 +167,9 @@ public class OceanPlacement : MonoBehaviour
         SpawnAtRandomSpot(cliffVariant);
     }
 
+    /// <summary>
+    /// Decides spawn point for passed cliff objects and spawns it at the position, adding it to the list
+    /// </summary>
     private void SpawnAtRandomSpot(GameObject cliffObj)
     {
         if (cliffObj != cliff3)
@@ -167,6 +196,9 @@ public class OceanPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clears objects from list
+    /// </summary>
     public void ClearObjects()
     {
         objectList.Clear();

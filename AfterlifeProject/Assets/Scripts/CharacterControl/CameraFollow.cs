@@ -17,6 +17,9 @@ public class CameraFollow : MonoBehaviour
         target = transform.parent.GetComponentInChildren<PlayerFollowTarget>().gameObject.transform;
     }
 
+    /// <summary>
+    /// Very simple camera follow script. Follows the player with a contrain to prevent the player from exiting the play space
+    /// </summary>
     void FixedUpdate()
     {
         Vector3 desiredPosition = target.position + offset;

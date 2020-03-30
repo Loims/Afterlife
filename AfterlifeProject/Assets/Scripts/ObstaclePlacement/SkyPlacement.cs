@@ -27,7 +27,10 @@ public class SkyPlacement : MonoBehaviour
     private int recentVariant;
 
     private float objDelay = 1.5f;
-
+    
+    /// <summary>
+    /// Instantiates prefabs and variables
+    /// </summary>
     private void OnEnable()
     {
         InstantiatePrefabs();
@@ -37,6 +40,9 @@ public class SkyPlacement : MonoBehaviour
         obstacleList = new List<GameObject>();
     }
 
+    /// <summary>
+    /// Sets sky parent to a sorting object and gets object pooler
+    /// </summary>
     private void Start()
     {
         skyParent = GameObject.Find("SkyObjects");
@@ -56,6 +62,9 @@ public class SkyPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Helper methods for instantiating prefabs
+    /// </summary>
     private void InstantiatePrefabs()
     {
         mountain1 = Resources.Load<GameObject>("Area2.Mountain1");
@@ -67,11 +76,17 @@ public class SkyPlacement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Helper to return objects to pool
+    /// </summary>
     private void ReturnObjToPool(GameObject obj)
     {
         pooler.ReturnToPool(obj);
     }
 
+    /// <summary>
+    /// Coroutine for spawning objects
+    /// </summary>
     private IEnumerator SpawnObjs(float waitTime)
     {
         while (true)
@@ -81,6 +96,9 @@ public class SkyPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method for spawning different object variants. Decides which object to spawn then calls helper method
+    /// </summary>
     private void SpawnObj()
     {
         GameObject objVariant;
@@ -126,6 +144,9 @@ public class SkyPlacement : MonoBehaviour
         SpawnAtRandomSpot(objVariant);
     }
 
+    /// <summary>
+    /// Helper method to generate spawn points. Spawn points are generated based on the passed in object
+    /// </summary>
     private void SpawnAtRandomSpot(GameObject obj)
     {
         if (obj == mountain1 || obj == mountain2)
@@ -165,6 +186,9 @@ public class SkyPlacement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clears all objects from object sorting gameobject
+    /// </summary>
     public void ClearObjects()
     {
         obstacleList.Clear();

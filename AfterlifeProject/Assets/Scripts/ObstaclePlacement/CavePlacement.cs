@@ -6,6 +6,8 @@ public class CavePlacement : MonoBehaviour
 {
     /// <summary>
     /// THIS ENTIRE SCRIPT IS TEMPORARY NOW. IT MUST BE CHANGED IN THE FUTURE
+    /// SCRIPT IS IDENTICAL TO THE OCEAN PLACEMENT SCRIPT EXCEPT VARIABLE NAMES
+    /// AND ADDS CEILING GENERATION
     /// </summary>
     [Header("Plane Transform")]
     [SerializeField] private Transform planeTransform;

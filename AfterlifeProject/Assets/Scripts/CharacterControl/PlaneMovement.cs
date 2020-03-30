@@ -12,6 +12,10 @@ public class PlaneMovement : MonoBehaviour
     {
         movementComp = GetComponentInChildren<PlayerMovement>();
     }
+
+    /// <summary>
+    /// Moves the gameplay plane forward with a constant speed based on the player state
+    /// </summary>
     void Update()
     {
         if (movementComp.playerState == PlayerMovement.State.WHALE)
@@ -29,6 +33,9 @@ public class PlaneMovement : MonoBehaviour
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Resets the position of the plane back to Vector3.zero
+    /// </summary>
     public void ResetPlane()
     {
         transform.position = Vector3.zero;
