@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MainCliff
   - NearMiss
+  - SkyObstacle
+  - CaveObstacle
+  - EndObstacle
   layers:
   - Default
   - TransparentFX
