@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,16 +14,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public State playerState;
+    public OnPlayerStateChange onStateChange;
 
     public float xyspeed = 8f;
 
     private float objRotationX;
     private float objRotationY;
 
+    private void Awake()
+    { 
+        if (onStateChange == null)
+        {
+            onStateChange = new OnPlayerStateChange();
+        }
+    }
+
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if(playerState == State.NULL)
+        if (playerState == State.NULL)
         {
             ChangeStateData();
         }
@@ -80,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
                 xyspeed = 10;
             }
         }
+        onStateChange.Invoke(playerState);
     }
 
     public State GetCurrentState()
@@ -87,3 +98,5 @@ public class PlayerMovement : MonoBehaviour
         return playerState;
     }
 }
+
+public class OnPlayerStateChange : UnityEvent<PlayerMovement.State> { }
