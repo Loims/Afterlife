@@ -198,6 +198,7 @@ public class PlayerFollowTarget : MonoBehaviour
         if(other.tag == "CaveObstacle")
         {
             //THIS IS PLACEHOLDER
+            CollisionEvent();
             StopGameWithLoss();
         }
 
