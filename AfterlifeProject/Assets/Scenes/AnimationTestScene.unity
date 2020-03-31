@@ -375,7 +375,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.71
+      scalar: 0.99
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -428,7 +428,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.79
+      scalar: 3.38
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4971,11 +4971,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: bee9bfeb2fe2931439c27a6288bf1e08,
-        type: 3}
-      propertyPath: m_Name
-      value: WhaleVersion3
-      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: bee9bfeb2fe2931439c27a6288bf1e08,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -5061,6 +5056,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eb941a6eb37cf413193b5171d6e061ba, type: 2}
+    - target: {fileID: -927199367670048503, guid: bee9bfeb2fe2931439c27a6288bf1e08,
+        type: 3}
+      propertyPath: m_Name
+      value: WhaleVersion3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bee9bfeb2fe2931439c27a6288bf1e08, type: 3}
 --- !u!1 &1474222591
@@ -5280,7 +5280,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.79
+      scalar: 0.59
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6083,7 +6083,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -6094,21 +6094,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.98648834
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0.4594594
+          inSlope: -0.60213685
+          outSlope: -0.60213685
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.08977038
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6600,7 +6600,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -7734,7 +7734,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 3
