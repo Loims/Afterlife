@@ -20,7 +20,7 @@ public class PlayerFollowTarget : MonoBehaviour
     private bool rollLeft = false;
     private bool rollRight = false;
 
-    [SerializeField] private float formTimer;
+    public float formTimer;
 
     [SerializeField] public bool hasHitObstacle = false;
 
