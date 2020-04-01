@@ -5,12 +5,17 @@ using UnityEngine;
 public class PlaneMovement : MonoBehaviour
 {
     private PlayerMovement movementComp;
+    private PlayerFollowTarget followComp;
 
     public float moveSpeed;
+
+    public float speedMultiplier;
 
     private void OnEnable()
     {
         movementComp = GetComponentInChildren<PlayerMovement>();
+        followComp = GetComponentInChildren<PlayerFollowTarget>();
+        speedMultiplier = 0.5f;
     }
 
     /// <summary>
@@ -18,19 +23,39 @@ public class PlaneMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
+        float formTimer = followComp.formTimer;
         if (movementComp.playerState == PlayerMovement.State.WHALE)
         {
-            moveSpeed = 8f;
+            moveSpeed = 12f * speedMultiplier;
         }
         else if (movementComp.playerState == PlayerMovement.State.PLANE)
         {
-            moveSpeed = 30f;
+            moveSpeed = 30f * speedMultiplier;
         }
         else if (movementComp.playerState == PlayerMovement.State.FLARE)
         {
-            moveSpeed = 15f;
+            moveSpeed = 20f * speedMultiplier;
         }
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+
+        speedMultiplier = IncreaseMultiplier(formTimer, moveSpeed);
+    }
+
+
+    private float IncreaseMultiplier(float timer, float mSpeed)
+    {
+        float multiplier;
+
+        if (timer < 30f)
+        {
+            multiplier = 30f / 60f;
+        }
+        else
+        {
+            multiplier = timer / 60f;
+        }
+        Debug.Log(multiplier);
+        return multiplier;
     }
 
     /// <summary>
