@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     private bool constrainX = true;
 
-    public Vector3 offset = new Vector3(0, 1, -10);
+    public Vector3 offset = new Vector3(0, 3, -10);
 
     private void OnEnable()
     {
@@ -24,16 +24,7 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        Vector3 clampedPos;
-        if (constrainX)
-        {
-            clampedPos = new Vector3(Mathf.Clamp(smoothedPos.x, -1.5f, 1.5f), Mathf.Clamp(smoothedPos.y, -1.5f, 1.5f), smoothedPos.z);
-        }
-        else
-        {
-            clampedPos = new Vector3(smoothedPos.x, Mathf.Clamp(smoothedPos.y, -1.5f, 1.5f), smoothedPos.z);
-        }
-        transform.position = clampedPos;
+        transform.position = smoothedPos;
     }
 
     public void ReleaseXConstrain()

@@ -70,10 +70,10 @@ public class PlayerMovement : MonoBehaviour
         float xClamp = Screen.width / 8;
         float yClamp = Screen.height / 8;
 
-        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        pos.x = Mathf.Clamp(pos.x, Screen.width - (Screen.width - xClamp), Screen.width - xClamp);
-        pos.y = Mathf.Clamp(pos.y, Screen.height - (Screen.height - yClamp), Screen.height - yClamp);
-        transform.position = Camera.main.ScreenToWorldPoint(pos);
+        Vector3 pos = transform.localPosition;
+        pos.x = Mathf.Clamp(pos.x, -12f, 12);
+        pos.y = Mathf.Clamp(pos.y, -6.5f, 6.5f);
+        transform.localPosition = pos;
     }
 
     /// <summary>
