@@ -54,7 +54,6 @@ public class PlaneMovement : MonoBehaviour
         {
             multiplier = timer / 60f;
         }
-        Debug.Log(multiplier);
         return multiplier;
     }
 

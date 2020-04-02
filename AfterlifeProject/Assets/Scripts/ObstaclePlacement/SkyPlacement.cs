@@ -8,6 +8,10 @@ public class SkyPlacement : MonoBehaviour
     [SerializeField] private Transform planeTransform;
 
     [Space]
+    [Header("Plane Script")]
+    [SerializeField] private PlaneMovement planeComp;
+
+    [Space]
     [Header("Object Pooler")]
     [SerializeField] private ObjectPooler pooler;
 
@@ -36,6 +40,7 @@ public class SkyPlacement : MonoBehaviour
         InstantiatePrefabs();
 
         planeTransform = transform.parent;
+        planeComp = transform.parent.GetComponent<PlaneMovement>();
 
         obstacleList = new List<GameObject>();
     }
@@ -151,7 +156,7 @@ public class SkyPlacement : MonoBehaviour
     {
         if (obj == mountain1 || obj == mountain2)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), -25.8f, planeTransform.position.z + 100f);
+            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), -25.8f, planeTransform.position.z + (100f + (20 * planeComp.speedMultiplier)));
             Quaternion spawnRot = Quaternion.Euler(-90, 0, 0);
             GameObject newObj = pooler.NewObject(obj, spawnPos, spawnRot);
             newObj.transform.parent = skyParent.transform;
@@ -163,7 +168,7 @@ public class SkyPlacement : MonoBehaviour
 
         else if (obj == hotAirBalloon1 || obj == hotAirBalloon2 || obj == hotAirBalloon3)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), Random.Range(-10f, 3.5f), planeTransform.position.z + 70f);
+            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), Random.Range(-10f, 3.5f), planeTransform.position.z + (100f + (20 * planeComp.speedMultiplier)));
             Quaternion spawnRot = Quaternion.Euler(0, 0, 0);
             GameObject newObj = pooler.NewObject(obj, spawnPos, spawnRot);
             newObj.transform.parent = skyParent.transform;
@@ -175,7 +180,7 @@ public class SkyPlacement : MonoBehaviour
 
         else if(obj == pillar)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), -18.28f, planeTransform.position.z + 100f);
+            Vector3 spawnPos = new Vector3(Random.Range(-17f, 17f), -18.28f, planeTransform.position.z + (100f + (20 * planeComp.speedMultiplier)));
             Quaternion spawnRot = Quaternion.Euler(-90, 0, 0);
             GameObject newObj = pooler.NewObject(obj, spawnPos, spawnRot);
             newObj.transform.parent = skyParent.transform;

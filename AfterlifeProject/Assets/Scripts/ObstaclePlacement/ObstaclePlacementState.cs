@@ -12,9 +12,9 @@ public class ObstaclePlacementState : MonoBehaviour
 
     [SerializeField] private PlayerMovement.State playerGenerationState;
 
-    private OceanPlacement oceanScript;
-    private SkyPlacement skyScript;
-    private CavePlacement caveScript;
+    public OceanPlacement oceanScript;
+    public SkyPlacement skyScript;
+    public CavePlacement caveScript;
     #endregion
 
     /// <summary>

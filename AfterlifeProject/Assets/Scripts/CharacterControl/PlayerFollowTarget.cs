@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerFollowTarget : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
     private PlaneMovement planeComp;
     private PlayerMovement movementComp;
     private PlayerDeath deathComp;
     private ObstaclePlacementState obstacleComp;
 
     [SerializeField] private Transform target;
+
+    private GameObject progressionObstacle;
 
     private float smoothSpeed;
     private float rotateSpeed;
@@ -21,6 +25,8 @@ public class PlayerFollowTarget : MonoBehaviour
     private bool rollRight = false;
 
     public float formTimer;
+    private bool formTimerProgress = true;
+    private bool progressionTriggerSpanwed = false;
 
     [SerializeField] public bool hasHitObstacle = false;
 
@@ -32,10 +38,14 @@ public class PlayerFollowTarget : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+        gameManager = GameManager.instance;
+
         planeComp = transform.parent.GetComponent<PlaneMovement>();
         movementComp = transform.parent.GetComponentInChildren<PlayerMovement>();
         deathComp = transform.parent.GetComponentInChildren<PlayerDeath>();
         obstacleComp = transform.parent.GetComponentInChildren<ObstaclePlacementState>();
+
+        progressionObstacle = Resources.Load<GameObject>("ProgressionObstacle");
 
         target = transform.parent.GetChild(2).transform;
         smoothSpeed = 0.125f;
@@ -87,28 +97,22 @@ public class PlayerFollowTarget : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        formTimer += Time.deltaTime;
-
-        if (movementComp.playerState != PlayerMovement.State.FLARE)
+        if (formTimerProgress)
         {
-            if (formTimer >= 120f)
-            {
-                planeComp.ResetPlane();
-                movementComp.ChangeStateData();
-                deathComp.DeathEvent();
-                obstacleComp.ClearObjectsInChildren();
-                formTimer = 0f;
-            }
+            formTimer += Time.deltaTime;
         }
-        else
+
+        if(formTimer >= 120f)
         {
-            if (formTimer >= 120f)
+            formTimerProgress = false;
+        }
+
+        if (!formTimerProgress)
+        {
+            if (!progressionTriggerSpanwed)
             {
-                if(!spawnedEnd)
-                {
-                    Instantiate(Resources.Load<GameObject>("End"), new Vector3(transform.position.x, transform.position.y, transform.position.z + 40f), Quaternion.identity);
-                    spawnedEnd = true;
-                }
+                gameManager.SpawnProgressObstacle();
+                progressionTriggerSpanwed = true;
             }
         }
 
@@ -183,69 +187,54 @@ public class PlayerFollowTarget : MonoBehaviour
     /// <summary>
     /// Collision event that is called when the player collides. Performs form changing, plane resetting, and has events for death in the future
     /// </summary>
-    private void CollisionEvent()
+    private void CollisionEvent(bool collision)
     {
         if (!hasHitObstacle)
         {
             hasHitObstacle = true;
         }
-        planeComp.ResetPlane();
-        movementComp.ChangeStateData();
-        deathComp.DeathEvent();
-        obstacleComp.ClearObjectsInChildren();
-        formTimer = 0f;
+
+        if (collision)
+        {
+            gameManager.ProgressFormWithCollision();
+        }
+        else
+        {
+            gameManager.ProgressForm();
+        }
     }
 
-    /// <summary>
-    /// Temp method. Ends the game with a loss
-    /// </summary>
-    private void StopGameWithLoss()
+    public void ResetBools()
     {
-        Debug.Log("YOU LOSE");
-        Time.timeScale = 0f;
-    }
-
-    /// <summary>
-    /// Temp method. Ends the game with a win
-    /// </summary>
-    private void StopGameWithWin()
-    {
-        Debug.Log("YOU WIN");
-        Time.timeScale = 0f;
+        formTimerProgress = true;
+        progressionTriggerSpanwed = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if(other.tag == "MainCliff")
+        if (other.tag == "ProgressObstacle")
         {
-            CollisionEvent();
+            if (other.name != "PlayerVisualTrigger")
+            {
+                CollisionEvent(false);
+            }
         }
-
-        if(other.tag == "SkyObstacle")
+        else if (other.tag == "MainCliff")
         {
-            CollisionEvent();
+            CollisionEvent(true);
         }
-
-        if(other.tag == "CaveObstacle")
+        else if(other.tag == "SkyObstacle")
         {
-            //THIS IS PLACEHOLDER
-            CollisionEvent();
-            StopGameWithLoss();
+            CollisionEvent(true);
         }
-
-        if(other.tag == "EndObstacle")
+        else if(other.tag == "CaveObstacle")
         {
-            //PLACEHOLDER
-            StopGameWithWin();
+            CollisionEvent(true);
+            gameManager.StopGameWithLoss();
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "NearMiss")
+        else if(other.tag == "EndObstacle")
         {
-            Debug.Log("Exit with " + other.gameObject);
+            gameManager.StopGameWithWin();
         }
     }
 }
