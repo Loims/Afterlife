@@ -9,8 +9,8 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledObjects;
     public List<Transform> pooledObjectParents;
 
-    public int growthRate = 5;
-    public int initalPoolSize = 5;
+    public int growthRate = 15;
+    public int initalPoolSize = 15;
 
     public static ObjectPooler instance { get; private set; }
 
