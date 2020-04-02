@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3164363202879485675}
   - component: {fileID: 6246797446815272157}
   - component: {fileID: 400147762575192100}
+  - component: {fileID: 891257606739077236}
   m_Layer: 0
   m_Name: Area1.Coral2
   m_TagString: Untagged
@@ -78,3 +79,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &891257606739077236
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139572978195891448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.015
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: -0.0008815797, y: -0.00091361, z: 0.02}
