@@ -15,6 +15,12 @@ public class PlayerFollowTarget : MonoBehaviour
 
     private GameObject progressionObstacle;
 
+    [SerializeField] private GameObject whaleVisual;
+    [SerializeField] private GameObject planeVisual;
+    [SerializeField] private GameObject flareVisual;
+
+    private PlayerMovement.State playerState;
+
     private float smoothSpeed;
     private float rotateSpeed;
     private float rollSpeed;
@@ -53,6 +59,12 @@ public class PlayerFollowTarget : MonoBehaviour
         rollSpeed = 800f;
 
         formTimer = 0f;
+
+        whaleVisual = transform.GetChild(0).GetChild(0).gameObject;
+        planeVisual = transform.GetChild(0).GetChild(1).gameObject;
+        flareVisual = transform.GetChild(0).GetChild(2).gameObject;
+
+        playerState = movementComp.playerState;
     }
 
     /// <summary>
@@ -90,6 +102,8 @@ public class PlayerFollowTarget : MonoBehaviour
                 }
             }
         }
+
+        UpdateVisual();
     }
 
     /// <summary>
@@ -125,6 +139,32 @@ public class PlayerFollowTarget : MonoBehaviour
         if(rollRight)
         {
             RollRight();
+        }
+    }
+
+    private void UpdateVisual()
+    {
+        playerState = movementComp.playerState;
+
+        switch(playerState)
+        {
+            case PlayerMovement.State.WHALE:
+                whaleVisual.SetActive(true);
+                planeVisual.SetActive(false);
+                flareVisual.SetActive(false);
+                break;
+
+            case PlayerMovement.State.PLANE:
+                whaleVisual.SetActive(false);
+                planeVisual.SetActive(true);
+                flareVisual.SetActive(false);
+                break;
+
+            case PlayerMovement.State.FLARE:
+                whaleVisual.SetActive(false);
+                planeVisual.SetActive(false);
+                flareVisual.SetActive(true);
+                break;
         }
     }
 
