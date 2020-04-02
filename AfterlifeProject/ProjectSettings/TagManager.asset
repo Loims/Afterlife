@@ -9,6 +9,7 @@ TagManager:
   - SkyObstacle
   - CaveObstacle
   - EndObstacle
+  - ProgressObstacle
   layers:
   - Default
   - TransparentFX
